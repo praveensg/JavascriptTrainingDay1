@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+		<TITLE>SAMPLE Code </TITLE>
+	</HEAD>
+	<body>
+		<h1> Math Calculator </h1>
+		<script src="first.js"></script>
+		<input type="number" id="txtFirstValue" placeholder="Enter the First Value"/>
+		<select id="slOperand">
+			<option>+</option>
+			<option>-</option>
+			<option>X</option>
+			<option>/</option>
+		</select>
+		<input type="number" id="txtSecondValue" placeholder="Enter the Second Value"/>
+		<button id="btnResult">=</button>
+		<span id="spResult"></span>
+		<script type="text/javascript">
+			function getResult(first, second, operand){
+				switch(operand) {
+					case "+":
+						return addFunc(first, second);
+					case "-":
+						return subFunc(first, second);
+					case "X":
+						return multFunc(first, second);
+					case "/":
+						return divFunc(first, second);
+				}
+			}
+			function performOperation(){
+				//get the values entered by the user....
+				var first = parseFloat(document.getElementById('txtFirstValue').value);
+				var second = parseFloat(document.getElementById('txtSecondValue').value);
+				//alert(typeof(first));
+				var operand = document.getElementById('slOperand').value;
+				var result = getResult(first, second, operand);
+				document.getElementById('spResult').innerText = result;
+			}
+
+			function onInit() {
+				var btn = document.getElementById('btnResult');
+				btn.addEventListener('click', performOperation);
+			}
+			window.addEventListener('load', function() {
+				onInit();
+			});
+		</script>
+	</body> 
+</HTML>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Data Types</title>
+		<script src="first.js"> </script>
+		<script src="classes.js" > </script>
+		<script type="text/javascript">
+			var collection = [];
+
+			function getResult(first, second, operand){
+				switch(operand) {
+					case "+":
+						return addFunc(first, second);
+					case "-":
+						return subFunc(first, second);
+					case "X":
+						return multFunc(first, second);
+					case "/":
+						return divFunc(first, second);
+				}
+			}
+			function onInit() {
+				onElementClick('btnResult', function() {
+					//alert("Test123");
+					var v1 = $('txtFirstValue').value;
+					var v2 = $('txtSecondValue').value;
+					var op = $('slOperand').value;
+					var result = getResult(v1, v2, op);
+					var output = new operation(v1, v2, op, result);
+					collection.push(output);
+					$("spResult").innerText = result;
+					// debugger;
+					// $("pHistory").innerText = JSON.stringify(output);
+					$("pHistory").innerHtml = '<tr><th>First Value </th><th>Second Value </th><th>Operand</th><th>Result</th></tr>';
+					collection.forEach(function(element, index) {
+						var row = '<tr><td>' + element.first;
+						row += '</td><td>' + element.second;
+						row += '</td><td>' + element.operand;
+						row += '</td><td>' + element.result;
+						row += '</td></tr>';
+						$("pHistory").innerHtml += row;
+					})
+				})
+			}
+			window.addEventListener('load', onInit);
+		</script>
+	</head>
+	<body>
+		<h1> Math Calculator </h1>
+		<div>
+
+		<input type="number" id="txtFirstValue" placeholder="Enter the First Value"/>
+		<select id="slOperand">
+			<option>+</option>
+			<option>-</option>
+			<option>X</option>
+			<option>/</option>
+		</select>
+		<input type="number" id="txtSecondValue" placeholder="Enter the Second Value"/>
+		<button id="btnResult">=</button>
+		<span id="spResult"></span>
+	</div>
+		<h2> History </h2>
+		<table id="pHistory">  </table>
+
+	</body>
+</html>
